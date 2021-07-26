@@ -17,6 +17,7 @@ public class SubjectTest {
     private FlashCard flashCard4;
     private FlashCard flashCard5;
     private FlashCard flashCard6;
+    private FlashCard flashCard7;
     private Subject subject;
     private Subject mtlist;
 
@@ -28,6 +29,7 @@ public class SubjectTest {
         flashCard4 = new FlashCard();
         flashCard5 = new FlashCard();
         flashCard6 = new FlashCard();
+        flashCard7 = new FlashCard();
         subject = new Subject();
         flashCard1.setName("Aung");
         flashCard2.setName("Khant");
@@ -35,6 +37,7 @@ public class SubjectTest {
         flashCard4.setName("What");
         flashCard5.setName("Whatman");
         flashCard6.setName("Coumpo");
+        flashCard7.setName("Alesso");
         flashCard1.createQuestion("How are you?");
         flashCard1.createAnswer("I'm good.");
         flashCard2.createQuestion("What are you?");
@@ -47,6 +50,8 @@ public class SubjectTest {
         flashCard5.createAnswer("Mom");
         flashCard6.createQuestion("Your name is what?");
         flashCard6.createAnswer("Nothing");
+        flashCard7.createQuestion("Do you have COVID?");
+        flashCard7.createAnswer("You say what?");
     }
 
     private void addFlashCards() {
@@ -113,19 +118,21 @@ public class SubjectTest {
     @Test
     void foundFlashCardTest() {
         addFlashCards();
+        assertTrue(subject.addFlashCard(flashCard7));
         LinkedList<FlashCard> whatSubject = new LinkedList<>();
         whatSubject.add(flashCard2);
         whatSubject.add(flashCard4);
         whatSubject.add(flashCard5);
         whatSubject.add(flashCard6);
-        assertEquals(4, whatSubject.size());
+        whatSubject.add(flashCard7);
+        assertEquals(5, whatSubject.size());
         LinkedList<FlashCard> a = subject.searchFlashCard("what");
-        assertEquals(4, a.size());
+        assertEquals(5, a.size());
         for (int i = 0; i < whatSubject.size()  ; i++){
             assertEquals(whatSubject.get(i), a.get(i));
         }
         LinkedList<FlashCard> b = subject.searchFlashCard("What");
-        assertEquals(4, b.size());
+        assertEquals(5, b.size());
         for (int i = 0; i < whatSubject.size()  ; i++) {
             assertEquals(whatSubject.get(i), b.get(i));
         }
