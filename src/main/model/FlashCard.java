@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.util.Locale;
 
 // Represent a FlashCard with the name, Question, Answer and day, month and day it was created.
 public class FlashCard {
@@ -14,31 +14,24 @@ public class FlashCard {
 
     // EFFECTS: Create a FlashCard that has no Question or Answer or date assigned to it
     public FlashCard() {
-        this.question = "";
-        this.answer = "";
     }
 
-    // EFFECTS: Set the question for the FlashCard
     public void createQuestion(String question) {
-        this.question += question;
+        this.question = question;
     }
 
-    // EFFECTS: Set the Answer to the Question for the FlashCard
     public void createAnswer(String answer) {
-        this.answer += answer;
+        this.answer = answer;
     }
 
-    // EFFECTS: get the question of the FlashCard
     public String getQuestion() {
         return question;
     }
 
-    // EFFECTS: get the answer of the FlashCard
     public String getAnswer() {
         return answer;
     }
 
-    // REQUIRES: day has string length of 2, month has string length of 2 and year has string length of 4
     // MODIFIES: this
     // EFFECTS: set day, month and year the FlashCard is created
     public void setDayMonthYear(int day, int month, int year) {
@@ -47,16 +40,18 @@ public class FlashCard {
         this.year = year;
     }
 
-    public int getDay() {
-        return day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public int getYear() {
-        return year;
+    // EFFECTS: return day, month or year and return 0 if invalid input
+    public int getDayMonthYear(String daymonthyear) {
+        if (daymonthyear.toLowerCase().equals("day")) {
+            return day;
+        }
+        if (daymonthyear.toLowerCase().equals("month")) {
+            return month;
+        }
+        if (daymonthyear.toLowerCase().equals("year")) {
+            return year;
+        }
+        return 0;
     }
 
     // EFFECTS: get the String representation of date (Date/Month/Year)
@@ -65,13 +60,10 @@ public class FlashCard {
         return date;
     }
 
-    // MODIFIES: this
-    // EFFECTS: give the name to the FlashCard
     public void setName(String name) {
         this.name = name;
     }
 
-    // EFFECTS: get the name of the FlashCard
     public String getName() {
         return name;
     }
