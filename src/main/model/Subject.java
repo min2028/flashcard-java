@@ -1,9 +1,8 @@
 package model;
 
 import java.awt.*;
-import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Collections;
 
 
 // Represent a list of FlashCards

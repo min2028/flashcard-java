@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Locale;
 
 // Represent a FlashCard with the name, Question, Answer and day, month and day it was created.
 public class FlashCard {
