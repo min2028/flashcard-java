@@ -22,6 +22,11 @@ public class Divider {
         return divider.size();
     }
 
+    // EFFECTS: get the subject at the given index
+    public Subject getSubject(int i) {
+        return divider.get(i);
+    }
+
     // REQUIRES: There is at least one subject in the divider
     // MODIFIES: this
     // EFFECTS: remove a given subject from the divider and returns true, false otherwise

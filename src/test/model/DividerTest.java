@@ -75,4 +75,13 @@ public class DividerTest {
         divider2.setDividerName("Khant Min");
         assertEquals("Khant Min", divider2.getDividerName());
     }
+
+    @Test
+    void getSubjectTest() {
+        divider.addSubject(subject1);
+        divider.addSubject(subject2);
+        divider.addSubject(subject3);
+        assertEquals(subject1, divider.getSubject(0));
+        assertEquals(subject2, divider.getSubject(1));
+    }
 }

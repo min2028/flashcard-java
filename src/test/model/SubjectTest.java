@@ -152,4 +152,11 @@ public class SubjectTest {
         subject.setSubjectName("Aung");
         assertEquals("Aung", subject.getSubjectName());
     }
+
+    @Test
+    void getFlashcardTest() {
+        addFlashCards();
+        assertEquals(flashCard2, subject.getFlashCard(1));
+        assertEquals(flashCard1, subject.getFlashCard(0));
+    }
 }

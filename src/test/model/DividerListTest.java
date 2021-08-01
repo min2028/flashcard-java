@@ -3,8 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedList;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,34 +25,6 @@ public class DividerListTest {
         divider5 = new Divider();
         dividerList = new DividerList();
     }
-    @Test
-    void addDividerTest() {
-        assertTrue(dividerList.addDivider(divider1));
-        assertEquals(1, dividerList.dividerSize());
-        assertFalse(dividerList.addDivider(divider1));
-        assertEquals(1, dividerList.dividerSize());
-        assertTrue(dividerList.addDivider(divider3));
-        assertTrue(dividerList.addDivider(divider2));
-        assertFalse(dividerList.addDivider(divider3));
-        assertTrue(dividerList.addDivider(divider4));
-        assertTrue(dividerList.addDivider(divider5));
-        assertEquals(5, dividerList.dividerSize());
-    }
-
-    @Test
-    void removeDividerTest() {
-        assertFalse(dividerList.removeDivider(divider1));
-        assertEquals(0, dividerList.dividerSize());
-        assertTrue(dividerList.addDivider(divider1));
-        assertEquals(1, dividerList.dividerSize());
-        assertTrue(dividerList.removeDivider(divider1));
-        assertEquals(0, dividerList.dividerSize());
-        addDivider();
-        assertTrue(dividerList.removeDivider(divider3));
-        assertEquals(4, dividerList.dividerSize());
-        assertFalse(dividerList.removeDivider(divider3));
-        assertEquals(4, dividerList.dividerSize());
-    }
 
     private void addDivider() {
         assertTrue(dividerList.addDivider(divider1));
@@ -65,9 +35,46 @@ public class DividerListTest {
     }
 
     @Test
-    void dividerSizeTest() {
-        assertEquals(0, dividerList.dividerSize());
+    void addDividerTest() {
+        assertTrue(dividerList.addDivider(divider1));
+        assertEquals(1, dividerList.dividerListSize());
+        assertFalse(dividerList.addDivider(divider1));
+        assertEquals(1, dividerList.dividerListSize());
+        assertTrue(dividerList.addDivider(divider3));
+        assertTrue(dividerList.addDivider(divider2));
+        assertFalse(dividerList.addDivider(divider3));
+        assertTrue(dividerList.addDivider(divider4));
+        assertTrue(dividerList.addDivider(divider5));
+        assertEquals(5, dividerList.dividerListSize());
+    }
+
+    @Test
+    void removeDividerTest() {
+        assertFalse(dividerList.removeDivider(divider1));
+        assertEquals(0, dividerList.dividerListSize());
+        assertTrue(dividerList.addDivider(divider1));
+        assertEquals(1, dividerList.dividerListSize());
+        assertTrue(dividerList.removeDivider(divider1));
+        assertEquals(0, dividerList.dividerListSize());
         addDivider();
-        assertEquals(5, dividerList.dividerSize());
+        assertTrue(dividerList.removeDivider(divider3));
+        assertEquals(4, dividerList.dividerListSize());
+        assertFalse(dividerList.removeDivider(divider3));
+        assertEquals(4, dividerList.dividerListSize());
+    }
+
+    @Test
+    void dividerSizeTest() {
+        assertEquals(0, dividerList.dividerListSize());
+        addDivider();
+        assertEquals(5, dividerList.dividerListSize());
+    }
+
+    @Test
+    void getDividerTest() {
+        addDivider();
+        assertEquals(divider1, dividerList.getDivider(0));
+        assertEquals(divider2, dividerList.getDivider(1));
+
     }
 }

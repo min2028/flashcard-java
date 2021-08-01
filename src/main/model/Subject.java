@@ -66,6 +66,11 @@ public class Subject {
         return emptyList;
     }
 
+    // EFFECTS: getting flashcard at the given index
+    public FlashCard getFlashCard(int i) {
+        return subject.get(i);
+    }
+
     // MODIFIES: this
     // EFFECTS: clears all the flashcards from the subject
     public void clearSubject() {

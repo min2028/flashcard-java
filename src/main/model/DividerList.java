@@ -25,8 +25,13 @@ public class DividerList {
         return false;
     }
 
+    // EFFECTS: get the divider at the given index
+    public Divider getDivider(int i) {
+        return dividerList.get(i);
+    }
+
     // EFFECTS: return the number of dividers in the dividerList.
-    public int dividerSize() {
+    public int dividerListSize() {
         return dividerList.size();
     }
 }

@@ -7,7 +7,7 @@ The application will be used to reinforce the memorization of things that will b
 by helping the user create flashcards. The flashcards will be stored in the subjects under the dividers which will help 
 the user compart relevant cards together. For instance, different terms (using divider) and within a term, 
 the different courses (using subject). The application will also show the user the date the flashcard was added, 
-allowing the user to see which flashcard they have **most likely** forgot by then.
+allowing the user to see which flashcard they have **most likely** forgot by then. 
 
 #### Who will use it?
 Mainly students who have to *memorize* and *learn* the materials from their studies (for eg, medical students)
@@ -24,9 +24,11 @@ other users could also benefit from it.
 ## User Stories
 
 Functions the application will have:
-- As a user, I want to be able to create and delete a divider
-- As a user, I want to be able to create and delete a subject
-- As a user, I want to be able to create and delete flashcard
-- As a user, I want to be able to add flashcards to a subject.
-- As a user, I want to be able to add subjects to a divider.
+- As a user, I want to be able to create a divider
+- As a user, I want to be able to create a subject
+- As a user, I want to be able to create a flashcard
+- As a user, I want to be able to add flashcards to a subject
+- As a user, I want to be able to add subjects to a divider
 - As a user, I want to be able to see the date the flashcard was added
+- As a user, I want to be able to save my flashcards, subjects, and dividers to file
+- As a user, I want to be able to load my flashcards, subjects, and dividers from file
