@@ -8,7 +8,12 @@ import java.util.LinkedList;
 
 // Represents a list of dividers
 public class DividerList implements Writable {
-    private LinkedList<Divider> dividerList = new LinkedList<>();
+    private LinkedList<Divider> dividerList;
+
+    // EFFECTS: create a DividerList with no dividers in it
+    public DividerList() {
+        dividerList = new LinkedList<>();
+    }
 
     // MODIFIES: this
     // EFFECTS: add divider to the dividerlist and return true if the divider is not already there and \

@@ -4,14 +4,19 @@ import model.Divider;
 import model.DividerList;
 import model.FlashCard;
 import model.Subject;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 // Flashcard Generator Application
 public class FlashcardGenerator {
     private Scanner input;
     private FlashCard flashCard;
-
+    private static final String JSON_STORE = "./data/dividerList.json";
     private Subject subject;
 
     private Divider divider;
@@ -22,8 +27,14 @@ public class FlashcardGenerator {
     private boolean run;
     private boolean makeAnotherFlashcard;
 
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
     // EFFECTS: run the FlashcardGenerator
-    public FlashcardGenerator() {
+    public FlashcardGenerator() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runFlashcardGenerator();
     }
 
@@ -32,16 +43,20 @@ public class FlashcardGenerator {
     public void runFlashcardGenerator() {
         System.out.println("Ready to start a creating flashcards?");
         System.out.println("Please type in one of the option below:");
-        displayOptions();
+
         programRunning = true;
         String cmd;
-        input = new Scanner(System.in);
         while (programRunning) {
+            displayOptions();
             cmd = input.next();
             cmd = cmd.toLowerCase();
 
             if (cmd.equals("quit")) {
                 programRunning = false;
+            }
+            if (cmd.equals("load")) {
+                loadDividerList();
+                programRunning = true;
             } else {
                 isReady(cmd);
                 makeAnotherFlashcard = true;
@@ -53,7 +68,6 @@ public class FlashcardGenerator {
         }
     }
 
-
     // MODIFIES: this
     // EFFECTS: process the user cmd
     public void isReady(String cmd) {
@@ -62,6 +76,12 @@ public class FlashcardGenerator {
             subjectCreator();
             dividerCreator();
             review();
+        } else if (cmd.equals("print")) {
+            viewDividers();
+            viewSubjects();
+            viewFlashcards();
+        } else if (cmd.equals("save")) {
+            saveDividerList();
         } else {
             notUnderstandCmd();
         }
@@ -71,6 +91,9 @@ public class FlashcardGenerator {
     public void displayOptions() {
         System.out.println("Ready");
         System.out.println("Quit");
+        System.out.println("Save");
+        System.out.println("Load");
+        System.out.println("Print");
     }
 
     //////////////////////////////////////
@@ -272,6 +295,8 @@ public class FlashcardGenerator {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: add flashcard to an existing subject
     public void addtoExistingSubject() {
         input = new Scanner(System.in);
         String numberofSubjectName = input.next();
@@ -280,6 +305,8 @@ public class FlashcardGenerator {
         createAnotherFlashcard();
     }
 
+    // MODIFIES: this
+    // EFFECTS: add Subject to an existing divider
     public void addtoExistingDivider() {
         input = new Scanner(System.in);
         String numberofDividerName = input.next();
@@ -288,8 +315,10 @@ public class FlashcardGenerator {
         createAnotherFlashcard();
     }
 
+    // EFFECTS: ending the flashcard generator
     public void endgenerator() {
         System.out.println("Would you like to end the generator?");
+        System.out.println("If you would like to save, enter no. ");
         input = new Scanner(System.in);
         String yesorno = input.next();
         if (yesorno.toLowerCase().equals("yes")) {
@@ -297,10 +326,35 @@ public class FlashcardGenerator {
             makeAnotherFlashcard = false;
         }
         if (yesorno.toLowerCase().equals("no")) {
-            makeAnotherFlashcard = true;
+            makeAnotherFlashcard = false;
             programRunning = true;
+
         } else if (!((yesorno.toLowerCase().equals("yes") || (yesorno.toLowerCase().equals("no"))))) {
             notUnderstandCmd();
         }
     }
+
+    // EFFECTS: saves the dividerlist to file
+    public void saveDividerList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(dividerList);
+            jsonWriter.close();
+            System.out.println("Saved " + "to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads dividerList from file
+    public void loadDividerList() {
+        try {
+            dividerList = jsonReader.read();
+            System.out.println("Loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 }
+
