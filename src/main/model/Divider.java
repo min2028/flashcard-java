@@ -5,7 +5,9 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.io.WriteAbortedException;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 // Represents a divider with its name and Subject list in it
 public class Divider implements Writable {
@@ -74,6 +76,11 @@ public class Divider implements Writable {
             jsonArray.put(sbj.toJson());
         }
         return jsonArray;
+    }
+
+    // EFFECTS: returns an unmodifiable list of subjects in this divider
+    public List<Subject> getSubjects() {
+        return Collections.unmodifiableList(divider);
     }
 }
 

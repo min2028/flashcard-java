@@ -89,4 +89,12 @@ public class DividerTest {
         assertEquals(subject1, divider.getSubject(0));
         assertEquals(subject2, divider.getSubject(1));
     }
+
+    @Test
+    void getSubjectsTest() {
+        addSubjectTest();
+        for (int i = 0; i < divider.dividerSize(); i++) {
+            assertEquals(divider.getSubject(i), divider.getSubjects().get(i));
+        }
+    }
 }

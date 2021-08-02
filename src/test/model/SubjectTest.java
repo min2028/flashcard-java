@@ -19,7 +19,6 @@ public class SubjectTest {
     private FlashCard flashCard6;
     private FlashCard flashCard7;
     private Subject subject;
-    private Subject mtlist;
 
     @BeforeEach
     public void runBefore() {
@@ -108,37 +107,6 @@ public class SubjectTest {
     }
 
     @Test
-    void notFindFlashCardTest() {
-        assertEquals("Aung", flashCard1.getName());
-        assertEquals("Khant", flashCard2.getName());
-        addFlashCards();
-        assertEquals(mtlist, subject.searchFlashCard("Kind"));
-    }
-
-    @Test
-    void foundFlashCardTest() {
-        addFlashCards();
-        assertTrue(subject.addFlashCard(flashCard7));
-        LinkedList<FlashCard> whatSubject = new LinkedList<>();
-        whatSubject.add(flashCard2);
-        whatSubject.add(flashCard4);
-        whatSubject.add(flashCard5);
-        whatSubject.add(flashCard6);
-        whatSubject.add(flashCard7);
-        assertEquals(5, whatSubject.size());
-        LinkedList<FlashCard> a = subject.searchFlashCard("what");
-        assertEquals(5, a.size());
-        for (int i = 0; i < whatSubject.size()  ; i++){
-            assertEquals(whatSubject.get(i), a.get(i));
-        }
-        LinkedList<FlashCard> b = subject.searchFlashCard("What");
-        assertEquals(5, b.size());
-        for (int i = 0; i < whatSubject.size()  ; i++) {
-            assertEquals(whatSubject.get(i), b.get(i));
-        }
-    }
-
-    @Test
     void clearSubjectTest() {
         assertEquals(0, subject.subjectSize());
         addFlashCards();
@@ -158,5 +126,13 @@ public class SubjectTest {
         addFlashCards();
         assertEquals(flashCard2, subject.getFlashCard(1));
         assertEquals(flashCard1, subject.getFlashCard(0));
+    }
+
+    @Test
+    void getFlashcardsTest() {
+        addFlashCards();
+        for (int i = 0; i < subject.subjectSize(); i++) {
+            assertEquals(subject.getFlashCard(i), subject.getFlashcards().get(i));
+        }
     }
 }

@@ -9,7 +9,7 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLOutput;
+import java.util.List;
 import java.util.Scanner;
 
 // Flashcard Generator Application
@@ -17,9 +17,9 @@ public class FlashcardGenerator {
     private Scanner input;
     private FlashCard flashCard;
     private static final String JSON_STORE = "./data/dividerList.json";
-    private Subject subject;
+    private Subject subject = new Subject();
 
-    private Divider divider;
+    private Divider divider = new Divider();
 
     private DividerList dividerList = new DividerList();
 
@@ -53,8 +53,8 @@ public class FlashcardGenerator {
 
             if (cmd.equals("quit")) {
                 programRunning = false;
-            }
-            if (cmd.equals("load")) {
+                makeAnotherFlashcard = false;
+            } else if (cmd.equals("load")) {
                 loadDividerList();
                 programRunning = true;
             } else {
@@ -77,9 +77,7 @@ public class FlashcardGenerator {
             dividerCreator();
             review();
         } else if (cmd.equals("print")) {
-            viewDividers();
-            viewSubjects();
-            viewFlashcards();
+            printDividers();
         } else if (cmd.equals("save")) {
             saveDividerList();
         } else {
@@ -209,31 +207,33 @@ public class FlashcardGenerator {
         System.out.println("Name of the Dividers:");
         for (int i = 0; i < dividerList.dividerListSize(); i++) {
             System.out.println((i + 1) + ". " + dividerList.getDivider(i).getDividerName());
-            System.out.println();
         }
+        System.out.println();
     }
 
     public void viewSubjects() {
         System.out.println("Name of the Subjects:");
-        for (int i = 0; i < dividerList.dividerListSize(); i++) {
-            for (int a = 0; a < divider.dividerSize(); a++) {
-                System.out.println((a + 1) + ". " + divider.getSubject(a).getSubjectName());
-                System.out.println();
+        int i = 1;
+        for (Divider d : dividerList.getDividers()) {
+            for (Subject s : d.getSubjects()) {
+                System.out.println(i++ + ". " + s.getSubjectName());
             }
+            System.out.println();
         }
     }
 
     public void viewFlashcards() {
         System.out.println("Name of the Flashcards:");
-        for (int i = 0; i < dividerList.dividerListSize(); i++) {
-            for (int a = 0; a < divider.dividerSize(); a++) {
-                for (int b = 0; b < subject.subjectSize(); b++) {
-                    System.out.println((b + 1) + ". " + subject.getFlashCard(b).getName());
-                    System.out.println("Question: " + subject.getFlashCard(b).getQuestion());
-                    System.out.println("Answer: " + subject.getFlashCard(b).getAnswer());
-                    System.out.println("Created on: " + subject.getFlashCard(b).getDate() + " (Day/Month/Year)");
-                    System.out.println("Subject: " + subject.getSubjectName());
-                    System.out.println("Divider: " + divider.getDividerName());
+        int i = 1;
+        for (Divider d : dividerList.getDividers()) {
+            for (Subject s : d.getSubjects()) {
+                for (FlashCard f : s.getFlashcards()) {
+                    System.out.println(i++ + ". " + f.getName());
+                    System.out.println("Question: " + f.getQuestion());
+                    System.out.println("Answer: " + f.getAnswer());
+                    System.out.println("Created on: " + f.getDate() + " (Day/Month/Year)");
+                    System.out.println("Subject: " + s.getSubjectName());
+                    System.out.println("Divider: " + d.getDividerName());
                     System.out.println();
                 }
             }
@@ -354,6 +354,49 @@ public class FlashcardGenerator {
             System.out.println("Loaded from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: prints all the dividers in dividerList to the console
+    private void printDividers() {
+        List<Divider> dividers = dividerList.getDividers();
+        int i = 1;
+
+        for (Divider d: dividers) {
+            System.out.println(i++ + ". " +  "Divider Name:");
+            System.out.println(d.getDividerName());
+            System.out.println();
+            printSubjects(d);
+        }
+    }
+
+    // EFFECTS: prints all the subjects in divider to the console
+    private void printSubjects(Divider divider) {
+        List<Subject> subjects = divider.getSubjects();
+
+        System.out.println("Subject Name:");
+        for (Subject s : subjects) {
+            System.out.println(s.getSubjectName());
+            System.out.println();
+            printFlashcards(s);
+        }
+    }
+
+    // EFFECTS: prints all the flashcards in Subject to the console
+    private void printFlashcards(Subject subject) {
+        List<FlashCard> flashcards = subject.getFlashcards();
+
+        System.out.println("Flashcard Info: ");
+        for (FlashCard f : flashcards) {
+            System.out.println("Flashcard Name: " + f.getName());
+            System.out.println();
+            System.out.println("Flashcard Question: " + f.getQuestion());
+            System.out.println();
+            System.out.println("Flashcard Answer: " + f.getAnswer());
+            System.out.println();
+            System.out.println("Flashcard Date: " + f.getDate());
+            System.out.println("/////////////////////////////");
+            System.out.println();
         }
     }
 }

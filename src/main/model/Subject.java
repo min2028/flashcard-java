@@ -5,8 +5,10 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.awt.*;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 
 // Represent a list of FlashCards
@@ -51,24 +53,6 @@ public class Subject implements Writable {
         return name;
     }
 
-    // EFFECTS: return a new linked list from flashcards
-    // whose name or question or answer contains searchSubstring
-    public LinkedList<FlashCard> searchFlashCard(String searchSubstring) {
-        LinkedList<FlashCard> emptyList = new LinkedList<FlashCard>();
-        LinkedList<FlashCard> foundCards = new LinkedList<FlashCard>();
-        for (FlashCard fc: subject) {
-            if (fc.getName().toLowerCase().contains(searchSubstring.toLowerCase())
-                    || fc.getQuestion().toLowerCase().contains(searchSubstring.toLowerCase())
-                    || fc.getAnswer().toLowerCase().contains(searchSubstring.toLowerCase())) {
-                foundCards.add(fc);
-            }
-        }
-        if (foundCards.size() > 0) {
-            return foundCards;
-        }
-        return emptyList;
-    }
-
     // EFFECTS: getting flashcard at the given index
     public FlashCard getFlashCard(int i) {
         return subject.get(i);
@@ -97,4 +81,8 @@ public class Subject implements Writable {
         return jsonArray;
     }
 
+    // EFFECTS: returns an unmodifiable list of flashcards in this subject
+    public List<FlashCard> getFlashcards() {
+        return Collections.unmodifiableList(subject);
+    }
 }

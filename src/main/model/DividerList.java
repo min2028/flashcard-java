@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 // Represents a list of dividers
 public class DividerList implements Writable {
@@ -44,6 +46,10 @@ public class DividerList implements Writable {
         return dividerList.size();
     }
 
+    // EFFECTS: returns an unmodifiable list of dividers in this dividerList
+    public List<Divider> getDividers() {
+        return Collections.unmodifiableList(dividerList);
+    }
 
     @Override
     public JSONObject toJson() {

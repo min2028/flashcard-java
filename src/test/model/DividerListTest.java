@@ -80,6 +80,13 @@ public class DividerListTest {
         addDivider();
         assertEquals(divider1, dividerList.getDivider(0));
         assertEquals(divider2, dividerList.getDivider(1));
+    }
 
+    @Test
+    void getDividersTest() {
+        addDivider();
+        for (int i = 0; i < dividerList.dividerListSize(); i++) {
+            assertEquals(dividerList.getDivider(i), dividerList.getDividers().get(i));
+        }
     }
 }
