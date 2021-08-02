@@ -1,0 +1,13 @@
+{"dividers": [{
+    "divider name": "first divider",
+    "subjects": [
+        {
+            "subject name": "first subject",
+            "flashcards": []
+        },
+        {
+            "subject name": "second subject",
+            "flashcards": []
+        }
+    ]
+}]}

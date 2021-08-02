@@ -27,6 +27,11 @@ public class DividerTest {
     }
 
     @Test
+    void testConstructor() {
+        assertEquals(0, divider.dividerSize());
+    }
+
+    @Test
     void addSubjectTest() {
         assertTrue(divider.addSubject(subject1));
         assertEquals(1, divider.dividerSize());

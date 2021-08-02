@@ -1,11 +1,22 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.io.WriteAbortedException;
 import java.util.LinkedList;
 
 // Represents a divider with its name and Subject list in it
-public class Divider {
+public class Divider implements Writable {
     private String name;
-    private LinkedList<Subject> divider = new LinkedList<>();
+    LinkedList<Subject> divider;
+
+    // EFFECTS: Create an emtpy divider
+    public Divider() {
+        divider = new LinkedList<>();
+    }
+
 
     // MODIFIES: this
     // EFFECTS: add a subject to the divider if it not already there and
@@ -46,6 +57,23 @@ public class Divider {
 
     public String getDividerName() {
         return name;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("divider name", name);
+        json.put("subjects", dividerToJson());
+        return json;
+    }
+
+    public JSONArray dividerToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Subject sbj: divider) {
+            jsonArray.put(sbj.toJson());
+        }
+        return jsonArray;
     }
 }
 

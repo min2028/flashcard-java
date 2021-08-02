@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.LinkedList;
 
-public class DividerList {
-    private Divider divider;
+// Represents a list of dividers
+public class DividerList implements Writable {
     private LinkedList<Divider> dividerList = new LinkedList<>();
 
     // MODIFIES: this
@@ -33,6 +37,23 @@ public class DividerList {
     // EFFECTS: return the number of dividers in the dividerList.
     public int dividerListSize() {
         return dividerList.size();
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("dividers", dividerListToJson());
+        return json;
+    }
+
+    public JSONArray dividerListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Divider d: dividerList) {
+            jsonArray.put(d.toJson());
+        }
+        return jsonArray;
     }
 }
 

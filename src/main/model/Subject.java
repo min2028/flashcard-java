@@ -1,15 +1,17 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.awt.*;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 
 // Represent a list of FlashCards
-public class Subject {
-    private LinkedList<FlashCard> emptyList;
+public class Subject implements Writable {
     private final LinkedList<FlashCard> subject;
-    private FlashCard flashCard;
     private String name;
 
     // EFFECTS: Create an empty Subject
@@ -52,6 +54,7 @@ public class Subject {
     // EFFECTS: return a new linked list from flashcards
     // whose name or question or answer contains searchSubstring
     public LinkedList<FlashCard> searchFlashCard(String searchSubstring) {
+        LinkedList<FlashCard> emptyList = new LinkedList<FlashCard>();
         LinkedList<FlashCard> foundCards = new LinkedList<FlashCard>();
         for (FlashCard fc: subject) {
             if (fc.getName().toLowerCase().contains(searchSubstring.toLowerCase())
@@ -76,4 +79,22 @@ public class Subject {
     public void clearSubject() {
         subject.clear();
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("subject name", name);
+        json.put("flashcards", subjectToJson());
+        return json;
+    }
+
+    public JSONArray subjectToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (FlashCard fc: subject) {
+            jsonArray.put(fc.toJson());
+        }
+        return jsonArray;
+    }
+
 }

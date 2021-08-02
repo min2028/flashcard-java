@@ -1,8 +1,11 @@
 package model;
 
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represent a FlashCard with the name, Question, Answer and day, month and day it was created.
-public class FlashCard {
+public class FlashCard implements Writable {
     private int day;
     private int month;
     private int year;
@@ -65,5 +68,17 @@ public class FlashCard {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("day", day);
+        json.put("month", month);
+        json.put("year", month);
+        json.put("flashcard name", name);
+        json.put("question", question);
+        json.put("answer", answer);
+        return json;
     }
 }

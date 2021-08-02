@@ -1,0 +1,56 @@
+{
+  "dividers": [
+    {
+      "divider name": "first divider",
+      "subjects": [
+        {
+          "subject name": "first subject",
+          "flashcards": [
+            {
+              "flashcard name": "first flashcard",
+              "question": "first question",
+              "answer": "first answer",
+              "day": 1,
+              "month": 1,
+              "year": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "divider name": "second divider",
+      "subjects": [
+        {
+          "subject name": "second subject",
+          "flashcards": [
+            {
+              "flashcard name": "second flashcard",
+              "question": "second question",
+              "answer": "second answer",
+              "day": 2,
+              "month": 2,
+              "year": 2
+            },
+            {
+              "flashcard name": "third flashcard",
+              "question": "third question",
+              "answer": "third answer",
+              "day": 3,
+              "month": 3,
+              "year": 3
+            }
+          ]
+        },
+        {
+          "subject name": "third subject",
+          "flashcards": []
+        }
+      ]
+    },
+    {
+      "divider name": "third divider",
+      "subjects": []
+    }
+  ]
+}
