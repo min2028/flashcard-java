@@ -35,6 +35,11 @@ public class DividerListTest {
     }
 
     @Test
+    void testConstructor() {
+        assertEquals(0, dividerList.dividerListSize());
+    }
+
+    @Test
     void addDividerTest() {
         assertTrue(dividerList.addDivider(divider1));
         assertEquals(1, dividerList.dividerListSize());
