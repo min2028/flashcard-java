@@ -82,6 +82,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: subject
+    // EFFECTS: parses Flashcard from JSON object and adds it to the Subject
     private void addFlashcard(Subject subject, JSONObject jsonObject) {
         String flashcardName = jsonObject.getString("flashcard name");
         String question = jsonObject.getString("question");

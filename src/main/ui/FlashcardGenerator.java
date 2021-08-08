@@ -15,13 +15,13 @@ import java.util.Scanner;
 // Flashcard Generator Application
 public class FlashcardGenerator {
     private Scanner input;
-    private FlashCard flashCard;
+    protected FlashCard flashCard;
     private static final String JSON_STORE = "./data/dividerList.json";
-    private Subject subject = new Subject();
+    protected Subject subject = new Subject();
 
-    private Divider divider = new Divider();
+    protected Divider divider = new Divider();
 
-    private DividerList dividerList = new DividerList();
+    protected DividerList dividerList = new DividerList();
 
     private boolean programRunning;
     private boolean run;
@@ -41,6 +41,7 @@ public class FlashcardGenerator {
     // MODIFIES: this
     // EFFECTS: process user input and welcoming the user
     public void runFlashcardGenerator() {
+        System.out.println("Welcome To Flashcard Generator!!!");
         System.out.println("Ready to start a creating flashcards?");
         System.out.println("Please type in one of the option below:");
 
@@ -148,6 +149,8 @@ public class FlashcardGenerator {
 
     //////////////////////////////////////
 
+    // EFFECTS: output on the console whether the user would like to review the flashcard information and execute
+    //          the user input.
     public void review() {
         System.out.println("Would you like to review the information of the flashcard you just entered?");
         System.out.println("Please enter: yes or no");
@@ -187,6 +190,8 @@ public class FlashcardGenerator {
         subject.addFlashCard(flashCard);
     }
 
+    // MODIFIES: this
+    // EFFECTS: create a divider and adding subject to it and adding the divider to the dividerList
     public void dividerCreator() {
         divider = new Divider();
         input = new Scanner(System.in);
@@ -197,12 +202,15 @@ public class FlashcardGenerator {
         dividerList.addDivider(divider);
     }
 
+    // EFFECTS: return to user that the input was not understood
     public void notUnderstandCmd() {
         System.out.println("Sorry. Please choose one of the options.");
         run = true;
     }
 
     ///////////////////////////////////////////
+
+    // EFFECTS: output the divider's name on the console
     public void viewDividers() {
         System.out.println("Name of the Dividers:");
         for (int i = 0; i < dividerList.dividerListSize(); i++) {
@@ -211,6 +219,7 @@ public class FlashcardGenerator {
         System.out.println();
     }
 
+    // EFFECTS: output the subject's name on the console
     public void viewSubjects() {
         System.out.println("Name of the Subjects:");
         int i = 1;
@@ -222,6 +231,7 @@ public class FlashcardGenerator {
         }
     }
 
+    // EFFECTS: output the flashcard's name, question, answer, the subject and divider it is in on the console
     public void viewFlashcards() {
         System.out.println("Name of the Flashcards:");
         int i = 1;
@@ -241,6 +251,10 @@ public class FlashcardGenerator {
     }
 
     //////////////////////////////////////////
+
+    // MODIFIES: this
+    // EFFECTS: prompting if the user would create another flashcard
+    // or output the flashcard info and ending the generator
     public void createAnotherFlashcard() {
         flashCard = new FlashCard();
         System.out.println("Would you like to create another flashcard?");
@@ -261,6 +275,8 @@ public class FlashcardGenerator {
         }
     }
 
+    // EFFECTS: display the option asking whether to put the flashcard in the new or exisiting divider,
+    //          and process user input and executing it
     public void displayNewOrExistingSubjectOptionAndProcess() {
         input = new Scanner(System.in);
         System.out.println("e - Add to existing subject");
@@ -279,6 +295,8 @@ public class FlashcardGenerator {
         }
     }
 
+    // EFFECTS: display the option asking whether to put the subject in the new or exisiting divider,
+    //          and process user input and executing it
     public void displayNewOrExistingDividerOptionAndProcess() {
         input = new Scanner(System.in);
         System.out.println("e - Add to existing divider");
@@ -315,6 +333,7 @@ public class FlashcardGenerator {
         createAnotherFlashcard();
     }
 
+    // MODIFIES: this
     // EFFECTS: ending the flashcard generator
     public void endgenerator() {
         System.out.println("Would you like to end the generator?");
