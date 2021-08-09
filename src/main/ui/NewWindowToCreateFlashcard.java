@@ -52,14 +52,16 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
 
     private JMenuBar menuBar;
 
-    private FlashCard flashcard = new FlashCard();
-    private Subject subject = new Subject();
-    private Divider divider = new Divider();
+    private FlashCard flashcard;
+    private Subject subject;
+    private Divider divider;
     private DividerList dividerList = new DividerList();
 
     private static final String JSON_STORE = "./data/dividerListForGUI.json";
     private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private JsonReader jsonReader = new JsonReader(JSON_STORE);
+
+    private int initialSet = 0;
 
     // Source: https://stackoverflow.com/questions/15694107/how-to-layout-multiple-panels-on-a-jframe-java
     public NewWindowToCreateFlashcard() throws FileNotFoundException {
@@ -133,7 +135,6 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
     }
 
 
-
     private void addMenuBar() {
         menuBar = new JMenuBar();
         JMenu m1 = new JMenu("FILE");
@@ -156,10 +157,6 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
     // REQUIRES: day, month and year must be digits
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("set")) {
-            setFlashcardinfo();
-        }
-
         if (e.getActionCommand().equals("save")) {
             try {
                 jsonWriter.open();
@@ -172,6 +169,16 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
 
         if (e.getActionCommand().equals("load")) {
             loadAndPrint();
+        }
+
+
+        if (e.getActionCommand().equals("set")) {
+            if (initialSet == 0) {
+                setInitialFlashcardinfo();
+                initialSet++;
+            } else {
+                categorizeFlashcard();
+            }
         }
     }
 
@@ -191,7 +198,10 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
         }
     }
 
-    public void setFlashcardinfo() {
+    public void setInitialFlashcardinfo() {
+        divider = new Divider();
+        subject = new Subject();
+        flashcard = new FlashCard();
         flashcard.setDayMonthYear(Integer.parseInt(day.getText()),
                 Integer.parseInt(month.getText()), Integer.parseInt(year.getText()));
         flashcard.setName(nameTextField.getText());
@@ -202,7 +212,78 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
         divider.setDividerName(dividerTextField.getText());
         divider.addSubject(subject);
         dividerList.addDivider(divider);
-        System.out.println("Set Successful");
+    }
+
+    public void categorizeFlashcard() {
+        flashcard = new FlashCard();
+        flashcard.setDayMonthYear(Integer.parseInt(day.getText()),
+                Integer.parseInt(month.getText()), Integer.parseInt(year.getText()));
+        flashcard.setName(nameTextField.getText());
+        flashcard.createQuestion(textAreaQuestion.getText());
+        flashcard.createAnswer(textAreaAnswer.getText());
+        sameDividerAndSubject();
+        sameDividerdifferentSubject();
+        differentDividerSameSubject();
+        differentDividerAndSubject();
+    }
+
+    public void sameDividerAndSubject() {
+        for (Divider d : dividerList.getDividers()) {
+            for (Subject s : d.getSubjects()) {
+                if (d.getDividerName().equals(dividerTextField.getText())
+                        && s.getSubjectName().equals(subjectTextField.getText())) {
+                    s.addFlashCard(flashcard);
+                }
+            }
+        }
+    }
+
+    public void sameDividerdifferentSubject() {
+        for (Divider d : dividerList.getDividers()) {
+            for (Subject s : d.getSubjects()) {
+                if (d.getDividerName().equals(dividerTextField.getText())
+                        && !(s.getSubjectName().equals(subjectTextField.getText()))) {
+                    subject = new Subject();
+                    subject.setSubjectName(subjectTextField.getText());
+                    subject.addFlashCard(flashcard);
+                    d.addSubject(subject);
+                }
+            }
+        }
+    }
+
+    public void differentDividerSameSubject() {
+        for (Divider d : dividerList.getDividers()) {
+            for (Subject s : d.getSubjects()) {
+                if (!(d.getDividerName().equals(dividerTextField.getText()))
+                        && s.getSubjectName().equals(subjectTextField.getText())) {
+                    subject = new Subject();
+                    subject.setSubjectName(subjectTextField.getText());
+                    subject.addFlashCard(flashcard);
+                    divider = new Divider();
+                    divider.setDividerName(dividerTextField.getText());
+                    divider.addSubject(subject);
+                    dividerList.addDivider(divider);
+                }
+            }
+        }
+    }
+
+    public void differentDividerAndSubject() {
+        for (Divider d : dividerList.getDividers()) {
+            for (Subject s : d.getSubjects()) {
+                if (!(d.getDividerName().equals(dividerTextField.getText()))
+                        && !(s.getSubjectName().equals(subjectTextField.getText()))) {
+                    subject = new Subject();
+                    subject.setSubjectName(subjectTextField.getText());
+                    subject.addFlashCard(flashcard);
+                    divider = new Divider();
+                    divider.setDividerName(dividerTextField.getText());
+                    divider.addSubject(subject);
+                    dividerList.addDivider(divider);
+                }
+            }
+        }
     }
 
     // EFFECTS: prints all the dividers in dividerList to the console
@@ -210,8 +291,8 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
         List<Divider> dividers = dividerList.getDividers();
         int i = 1;
 
-        for (Divider d: dividers) {
-            System.out.println(i++ + ". " +  "Divider Name:");
+        for (Divider d : dividers) {
+            System.out.println(i++ + ". " + "Divider Name:");
             System.out.println(d.getDividerName());
             System.out.println();
             printSubjects(d);
@@ -222,9 +303,10 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
     // EFFECTS: prints all the subjects in divider to the console
     private void printSubjects(Divider divider) {
         java.util.List<Subject> subjects = divider.getSubjects();
+        int i = 1;
 
-        System.out.println("Subject Name:");
         for (Subject s : subjects) {
+            System.out.println(i++ + ". " + "Subject Name:");
             System.out.println(s.getSubjectName());
             System.out.println();
             printFlashcards(s);
