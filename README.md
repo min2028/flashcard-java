@@ -32,3 +32,7 @@ Functions the application will have:
 - As a user, I want to be able to see the date the flashcard was added
 - As a user, I want to be able to save my flashcards, subjects, and dividers to file
 - As a user, I want to be able to load my flashcards, subjects, and dividers from file
+- As a user, I want to be able to load and save the state of the application (For GUI)
+- As a user, I want to be able to add multiple flashcards to subject and dividers (For GUI)
+- As a user, I want to be able to see the information of the flashcard and name of the divider and subject it has been 
+  added to when I load the generator. (For GUI)

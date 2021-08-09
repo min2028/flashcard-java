@@ -24,7 +24,6 @@ public class FlashcardGeneratorApp extends JFrame implements ActionListener {
     public FlashcardGeneratorApp() {
         super("Flashcard Generator");
         setSize(940, 636);
-        menuBar();
         JPanel backgroundpanel = new JPanel();
         background = new JLabel("");
         background.setIcon(new ImageIcon("/Users/sittpaing/Downloads/flashcardIcon2.jpeg"));
@@ -45,22 +44,6 @@ public class FlashcardGeneratorApp extends JFrame implements ActionListener {
     private void centreOnScreen() {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
-    }
-
-    private void menuBar() {
-        menuBar = new JMenuBar();
-        JMenu m1 = new JMenu("FILE");
-        menuBar.add(m1);
-        JMenuItem load = new JMenuItem("Load");
-        JMenuItem print = new JMenuItem("Print");
-        load.setActionCommand("load");
-        load.addActionListener(this);
-        print.setActionCommand("print");
-        print.addActionListener(this);
-        m1.add(load);
-        m1.add(print);
-
-        this.getContentPane().add(BorderLayout.NORTH, menuBar);
     }
 
     private void options() {
@@ -95,19 +78,12 @@ public class FlashcardGeneratorApp extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("quit")) {
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
-
-        if (e.getActionCommand().equals("print")) {
-            //TODO: implement
-        }
-
-        if (e.getActionCommand().equals("load")) {
-            //TODO: implement
-        }
     }
 
 
     public static void main(String[] args) throws IOException {
         new FlashcardGeneratorApp();
+
 //        try {
 //            new FlashcardGenerator();
 //            System.out.println("Flashcard generator quitted.");
