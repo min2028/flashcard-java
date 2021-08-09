@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.*;
 
-
+// Represents a flashcard generator GUI
 public class FlashcardGeneratorApp extends JFrame implements ActionListener {
 
     private JButton ready;
@@ -21,6 +21,7 @@ public class FlashcardGeneratorApp extends JFrame implements ActionListener {
 
     private Dimension optionsDimension = new Dimension(300, 100);
 
+    // EFFECTS: Create a flashcard generator window with background
     public FlashcardGeneratorApp() {
         super("Flashcard Generator");
         setSize(940, 636);
@@ -46,6 +47,8 @@ public class FlashcardGeneratorApp extends JFrame implements ActionListener {
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
     }
 
+    // MODIFIES: this
+    // EFFECTS: add the functions to the Ready and Quit JButton and display on the optionsPanel
     private void options() {
         optionsPanel = new JPanel();
 
@@ -65,6 +68,9 @@ public class FlashcardGeneratorApp extends JFrame implements ActionListener {
 
     }
 
+    // EFFECTS: processes the action on the JButtons, if clicked on Ready,
+    //          create a new Window to generate flashcard
+    //          If clicked on quit, the flashcard generator quits
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("ready")) {
             try {
@@ -83,12 +89,11 @@ public class FlashcardGeneratorApp extends JFrame implements ActionListener {
 
     public static void main(String[] args) throws IOException {
         new FlashcardGeneratorApp();
-
-//        try {
-//            new FlashcardGenerator();
-//            System.out.println("Flashcard generator quitted.");
-//        } catch (FileNotFoundException e) {
-//            System.out.println("file not found: Choose another file");
-//        }
+        try {
+            new FlashcardGenerator();
+            System.out.println("Flashcard generator quitted.");
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found: Choose another file");
+        }
     }
 }

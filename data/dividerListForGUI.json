@@ -1,27 +1,30 @@
-{"dividers": [{
-    "divider name": "Min1",
-    "subjects": [
-        {
-            "subject name": "Khant1",
+{"dividers": [
+    {
+        "divider name": "first",
+        "subjects": [{
+            "subject name": "first",
             "flashcards": [{
-                "month": 0,
-                "question": "Question: ",
-                "answer": "Answer: ",
-                "year": 0,
-                "flashcard name": "Aung1",
-                "day": 0
+                "month": 1,
+                "question": "Question: first",
+                "answer": "Answer: first",
+                "year": 1,
+                "flashcard name": "first",
+                "day": 1
             }]
-        },
-        {
-            "subject name": "Khant2",
+        }]
+    },
+    {
+        "divider name": "second",
+        "subjects": [{
+            "subject name": "second",
             "flashcards": [{
-                "month": 0,
-                "question": "Question: ",
-                "answer": "Answer: ",
-                "year": 0,
-                "flashcard name": "Aung1",
-                "day": 0
+                "month": 2,
+                "question": "Question: second",
+                "answer": "Answer: second",
+                "year": 2,
+                "flashcard name": "second",
+                "day": 2
             }]
-        }
-    ]
-}]}
+        }]
+    }
+]}
