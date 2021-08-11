@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 // Represents a divider with its name and Subject list in it
-public class Divider implements Writable {
+public class Divider extends Writable implements Compartable {
     private String name;
     LinkedList<Subject> divider;
 
@@ -18,38 +18,41 @@ public class Divider implements Writable {
         divider = new LinkedList<>();
     }
 
-
     // MODIFIES: this
     // EFFECTS: add a subject to the divider if it not already there and
     // returns true if added successfully, false otherwise
-    public boolean addSubject(Subject subject) {
-        if (!divider.contains(subject)) {
-            return divider.add(subject);
+    @Override
+    public boolean add(Object subject) {
+        if (subject instanceof Subject) {
+            if (!divider.contains(subject)) {
+                return divider.add((Subject) subject);
+            }
         }
         return false;
-    }
-
-    // EFFECTS: return the number of subjects of the divider
-    public int dividerSize() {
-        return divider.size();
-    }
-
-    // EFFECTS: get the subject at the given index
-    public Subject getSubject(int i) {
-        return divider.get(i);
     }
 
     // REQUIRES: There is at least one subject in the divider
     // MODIFIES: this
     // EFFECTS: remove a given subject from the divider and returns true, false otherwise
-    public boolean removeSubject(Subject subject) {
-        return divider.remove(subject);
+    @Override
+    public boolean remove(Object subject) {
+        return divider.remove((Subject) subject);
     }
 
-    // MODIFIES: this
-    // EFFECTS: clears all the subjects from the divider
-    public void clearDivider() {
-        divider.clear();
+    // EFFECTS: return the number of subjects of the divider
+    @Override
+    public int size() {
+        return divider.size();
+    }
+
+    // EFFECTS: get the subject at the given index
+    public Subject get(int index) {
+        return divider.get(index);
+    }
+
+    // EFFECTS: returns an unmodifiable list of subjects in this divider
+    public List<Subject> getList() {
+        return Collections.unmodifiableList(divider);
     }
 
     public void setDividerName(String name) {
@@ -75,11 +78,6 @@ public class Divider implements Writable {
             jsonArray.put(sbj.toJson());
         }
         return jsonArray;
-    }
-
-    // EFFECTS: returns an unmodifiable list of subjects in this divider
-    public List<Subject> getSubjects() {
-        return Collections.unmodifiableList(divider);
     }
 }
 

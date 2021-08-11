@@ -60,7 +60,7 @@ public class JsonReader {
         String dividerName = jsonObject.getString("divider name");
         Divider divider = new Divider();
         divider.setDividerName(dividerName);
-        dividerList.addDivider(divider);
+        dividerList.add(divider);
         JSONArray jsonArray = jsonObject.getJSONArray("subjects");
         for (Object json: jsonArray) {
             JSONObject nextSubject = (JSONObject) json;
@@ -74,7 +74,7 @@ public class JsonReader {
         String subjectName = jsonObject.getString("subject name");
         Subject subject = new Subject();
         subject.setSubjectName(subjectName);
-        divider.addSubject(subject);
+        divider.add(subject);
         JSONArray jsonArray = jsonObject.getJSONArray("flashcards");
         for (Object json: jsonArray) {
             JSONObject nextFlashcard = (JSONObject) json;
@@ -96,6 +96,6 @@ public class JsonReader {
         flashCard.setDayMonthYear(day, month, year);
         flashCard.createQuestion(question);
         flashCard.createAnswer(answer);
-        subject.addFlashCard(flashCard);
+        subject.add(flashCard);
     }
 }

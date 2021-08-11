@@ -12,7 +12,7 @@ import java.util.List;
 
 
 // Represent a list of FlashCards
-public class Subject implements Writable {
+public class Subject extends Writable implements Compartable {
     private final LinkedList<FlashCard> subject;
     private String name;
 
@@ -24,25 +24,40 @@ public class Subject implements Writable {
     // MODIFIES: this
     // EFFECTS: add a FlashCard to the Subject if it is not already there
     // and returns true if added successfully, false otherwise
-    public boolean addFlashCard(FlashCard flashCard) {
-        if (!subject.contains(flashCard)) {
-            return subject.add(flashCard);
+    @Override
+    public boolean add(Object flashCard) {
+        if (flashCard instanceof FlashCard) {
+            if (!subject.contains(flashCard)) {
+                return subject.add((FlashCard) flashCard);
+            }
         }
         return false;
     }
 
     // MODIFIES: this
     // EFFECTS: remove the flashCard from the Subject and returns true, false otherwise
-    public boolean removeFlashCard(FlashCard flashCard) {
+    @Override
+    public boolean remove(Object flashCard) {
         if (subject.size() > 0) {
-            return subject.remove(flashCard);
+            return subject.remove((FlashCard) flashCard);
         }
         return false;
     }
 
     // EFFECTS: return the number of FlashCards in the Subject
-    public int subjectSize() {
+    @Override
+    public int size() {
         return subject.size();
+    }
+
+    // EFFECTS: getting flashcard at the given index
+    public FlashCard get(int index) {
+        return subject.get(index);
+    }
+
+    // EFFECTS: returns an unmodifiable list of flashcards in this subject
+    public List<FlashCard> getList() {
+        return Collections.unmodifiableList(subject);
     }
 
     public void setSubjectName(String name) {
@@ -51,17 +66,6 @@ public class Subject implements Writable {
 
     public String getSubjectName() {
         return name;
-    }
-
-    // EFFECTS: getting flashcard at the given index
-    public FlashCard getFlashCard(int i) {
-        return subject.get(i);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: clears all the flashcards from the subject
-    public void clearSubject() {
-        subject.clear();
     }
 
     @Override
@@ -81,8 +85,4 @@ public class Subject implements Writable {
         return jsonArray;
     }
 
-    // EFFECTS: returns an unmodifiable list of flashcards in this subject
-    public List<FlashCard> getFlashcards() {
-        return Collections.unmodifiableList(subject);
-    }
 }

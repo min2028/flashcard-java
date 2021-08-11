@@ -27,66 +27,66 @@ public class DividerListTest {
     }
 
     private void addDivider() {
-        assertTrue(dividerList.addDivider(divider1));
-        assertTrue(dividerList.addDivider(divider2));
-        assertTrue(dividerList.addDivider(divider3));
-        assertTrue(dividerList.addDivider(divider4));
-        assertTrue(dividerList.addDivider(divider5));
+        assertTrue(dividerList.add(divider1));
+        assertTrue(dividerList.add(divider2));
+        assertTrue(dividerList.add(divider3));
+        assertTrue(dividerList.add(divider4));
+        assertTrue(dividerList.add(divider5));
     }
 
     @Test
     void testConstructor() {
-        assertEquals(0, dividerList.dividerListSize());
+        assertEquals(0, dividerList.size());
     }
 
     @Test
     void addDividerTest() {
-        assertTrue(dividerList.addDivider(divider1));
-        assertEquals(1, dividerList.dividerListSize());
-        assertFalse(dividerList.addDivider(divider1));
-        assertEquals(1, dividerList.dividerListSize());
-        assertTrue(dividerList.addDivider(divider3));
-        assertTrue(dividerList.addDivider(divider2));
-        assertFalse(dividerList.addDivider(divider3));
-        assertTrue(dividerList.addDivider(divider4));
-        assertTrue(dividerList.addDivider(divider5));
-        assertEquals(5, dividerList.dividerListSize());
+        assertTrue(dividerList.add(divider1));
+        assertEquals(1, dividerList.size());
+        assertFalse(dividerList.add(divider1));
+        assertEquals(1, dividerList.size());
+        assertTrue(dividerList.add(divider3));
+        assertTrue(dividerList.add(divider2));
+        assertFalse(dividerList.add(divider3));
+        assertTrue(dividerList.add(divider4));
+        assertTrue(dividerList.add(divider5));
+        assertEquals(5, dividerList.size());
     }
 
     @Test
     void removeDividerTest() {
-        assertFalse(dividerList.removeDivider(divider1));
-        assertEquals(0, dividerList.dividerListSize());
-        assertTrue(dividerList.addDivider(divider1));
-        assertEquals(1, dividerList.dividerListSize());
-        assertTrue(dividerList.removeDivider(divider1));
-        assertEquals(0, dividerList.dividerListSize());
+        assertFalse(dividerList.remove(divider1));
+        assertEquals(0, dividerList.size());
+        assertTrue(dividerList.add(divider1));
+        assertEquals(1, dividerList.size());
+        assertTrue(dividerList.remove(divider1));
+        assertEquals(0, dividerList.size());
         addDivider();
-        assertTrue(dividerList.removeDivider(divider3));
-        assertEquals(4, dividerList.dividerListSize());
-        assertFalse(dividerList.removeDivider(divider3));
-        assertEquals(4, dividerList.dividerListSize());
+        assertTrue(dividerList.remove(divider3));
+        assertEquals(4, dividerList.size());
+        assertFalse(dividerList.remove(divider3));
+        assertEquals(4, dividerList.size());
     }
 
     @Test
     void dividerSizeTest() {
-        assertEquals(0, dividerList.dividerListSize());
+        assertEquals(0, dividerList.size());
         addDivider();
-        assertEquals(5, dividerList.dividerListSize());
+        assertEquals(5, dividerList.size());
     }
 
     @Test
     void getDividerTest() {
         addDivider();
-        assertEquals(divider1, dividerList.getDivider(0));
-        assertEquals(divider2, dividerList.getDivider(1));
+        assertEquals(divider1, dividerList.get(0));
+        assertEquals(divider2, dividerList.get(1));
     }
 
     @Test
     void getDividersTest() {
         addDivider();
-        for (int i = 0; i < dividerList.dividerListSize(); i++) {
-            assertEquals(dividerList.getDivider(i), dividerList.getDividers().get(i));
+        for (int i = 0; i < dividerList.size(); i++) {
+            assertEquals(dividerList.get(i), dividerList.getList().get(i));
         }
     }
 }

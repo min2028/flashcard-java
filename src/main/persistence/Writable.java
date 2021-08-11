@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 // From JsonSerializationDemo
 
-public interface Writable {
+public abstract class Writable {
     // EFFECTS: returns this as JSON object
-    JSONObject toJson();
+    protected abstract JSONObject toJson();
 }

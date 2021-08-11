@@ -187,7 +187,7 @@ public class FlashcardGenerator {
         System.out.println("Please enter the name of the subject.");
         String subjectName = input.nextLine();
         subject.setSubjectName(subjectName);
-        subject.addFlashCard(flashCard);
+        subject.add(flashCard);
     }
 
     // MODIFIES: this
@@ -198,8 +198,8 @@ public class FlashcardGenerator {
         System.out.println("Please give the name to the divider the subject will be added to.");
         String dividerName = input.nextLine();
         divider.setDividerName(dividerName);
-        divider.addSubject(subject);
-        dividerList.addDivider(divider);
+        divider.add(subject);
+        dividerList.add(divider);
     }
 
     // EFFECTS: return to user that the input was not understood
@@ -213,8 +213,8 @@ public class FlashcardGenerator {
     // EFFECTS: output the divider's name on the console
     public void viewDividers() {
         System.out.println("Name of the Dividers:");
-        for (int i = 0; i < dividerList.dividerListSize(); i++) {
-            System.out.println((i + 1) + ". " + dividerList.getDivider(i).getDividerName());
+        for (int i = 0; i < dividerList.size(); i++) {
+            System.out.println((i + 1) + ". " + dividerList.get(i).getDividerName());
         }
         System.out.println();
     }
@@ -223,8 +223,8 @@ public class FlashcardGenerator {
     public void viewSubjects() {
         System.out.println("Name of the Subjects:");
         int i = 1;
-        for (Divider d : dividerList.getDividers()) {
-            for (Subject s : d.getSubjects()) {
+        for (Divider d : dividerList.getList()) {
+            for (Subject s : d.getList()) {
                 System.out.println(i++ + ". " + s.getSubjectName());
             }
             System.out.println();
@@ -235,9 +235,9 @@ public class FlashcardGenerator {
     public void viewFlashcards() {
         System.out.println("Name of the Flashcards:");
         int i = 1;
-        for (Divider d : dividerList.getDividers()) {
-            for (Subject s : d.getSubjects()) {
-                for (FlashCard f : s.getFlashcards()) {
+        for (Divider d : dividerList.getList()) {
+            for (Subject s : d.getList()) {
+                for (FlashCard f : s.getList()) {
                     System.out.println(i++ + ". " + f.getName());
                     System.out.println("Question: " + f.getQuestion());
                     System.out.println("Answer: " + f.getAnswer());
@@ -318,7 +318,7 @@ public class FlashcardGenerator {
     public void addtoExistingSubject() {
         input = new Scanner(System.in);
         String numberofSubjectName = input.next();
-        divider.getSubject(Integer.parseInt(numberofSubjectName) - 1).addFlashCard(flashCard);
+        divider.get(Integer.parseInt(numberofSubjectName) - 1).add(flashCard);
         System.out.println("Flashcard added successfully");
         createAnotherFlashcard();
     }
@@ -328,7 +328,7 @@ public class FlashcardGenerator {
     public void addtoExistingDivider() {
         input = new Scanner(System.in);
         String numberofDividerName = input.next();
-        dividerList.getDivider(Integer.parseInt(numberofDividerName) - 1).addSubject(subject);
+        dividerList.get(Integer.parseInt(numberofDividerName) - 1).add(subject);
         System.out.println("Subject added successfully");
         createAnotherFlashcard();
     }
@@ -378,7 +378,7 @@ public class FlashcardGenerator {
 
     // EFFECTS: prints all the dividers in dividerList to the console
     private void printDividers() {
-        List<Divider> dividers = dividerList.getDividers();
+        List<Divider> dividers = dividerList.getList();
         int i = 1;
 
         for (Divider d: dividers) {
@@ -391,7 +391,7 @@ public class FlashcardGenerator {
 
     // EFFECTS: prints all the subjects in divider to the console
     private void printSubjects(Divider divider) {
-        List<Subject> subjects = divider.getSubjects();
+        List<Subject> subjects = divider.getList();
 
         System.out.println("Subject Name:");
         for (Subject s : subjects) {
@@ -403,7 +403,7 @@ public class FlashcardGenerator {
 
     // EFFECTS: prints all the flashcards in Subject to the console
     private void printFlashcards(Subject subject) {
-        List<FlashCard> flashcards = subject.getFlashcards();
+        List<FlashCard> flashcards = subject.getList();
 
         System.out.println("Flashcard Info: ");
         for (FlashCard f : flashcards) {

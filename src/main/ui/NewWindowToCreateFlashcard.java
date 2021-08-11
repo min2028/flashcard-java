@@ -271,10 +271,10 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
         flashcard.createQuestion(textAreaQuestion.getText());
         flashcard.createAnswer(textAreaAnswer.getText());
         subject.setSubjectName(subjectTextField.getText());
-        subject.addFlashCard(flashcard);
+        subject.add(flashcard);
         divider.setDividerName(dividerTextField.getText());
-        divider.addSubject(subject);
-        dividerList.addDivider(divider);
+        divider.add(subject);
+        dividerList.add(divider);
     }
 
     // REQUIRES: day, month and year must be integers
@@ -297,12 +297,12 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
     // EFFECTS: Adding the new flashcard to the existing subject and divider if the name of the subject and divider
     //          input for this flashcard is already in the dividerList
     public void sameDividerAndSubject() {
-        for (Divider d : dividerList.getDividers()) {
-            for (Subject s : d.getSubjects()) {
+        for (Divider d : dividerList.getList()) {
+            for (Subject s : d.getList()) {
                 if (d.getDividerName().equals(dividerTextField.getText())
                         && s.getSubjectName().equals(subjectTextField.getText())) {
                     subject = s;
-                    subject.addFlashCard(flashcard);
+                    subject.add(flashcard);
                     divider = d;
                 }
             }
@@ -313,15 +313,15 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
     // EFFECTS: Adding the new flashcard to a newly created subject in the existing divider if the name of the
     //          divider inputted is the same as the divider in the dividerList but the name of the subject is new.
     public void sameDividerdifferentSubject() {
-        for (Divider d : dividerList.getDividers()) {
-            for (Subject s : d.getSubjects()) {
+        for (Divider d : dividerList.getList()) {
+            for (Subject s : d.getList()) {
                 if (d.getDividerName().equals(dividerTextField.getText())
                         && !(s.getSubjectName().equals(subjectTextField.getText()))) {
                     subject = new Subject();
                     subject.setSubjectName(subjectTextField.getText());
-                    subject.addFlashCard(flashcard);
+                    subject.add(flashcard);
                     divider = d;
-                    divider.addSubject(subject);
+                    divider.add(subject);
                 }
             }
         }
@@ -331,17 +331,17 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
     // EFFECTS: Adding the new flashcard to a newly created subject and divider if the name of the divider inputted
     //          is new but the subject name is the same
     public void differentDividerSameSubject() {
-        for (Divider d : dividerList.getDividers()) {
-            for (Subject s : d.getSubjects()) {
+        for (Divider d : dividerList.getList()) {
+            for (Subject s : d.getList()) {
                 if (!(d.getDividerName().equals(dividerTextField.getText()))
                         && s.getSubjectName().equals(subjectTextField.getText())) {
                     subject = new Subject();
                     subject.setSubjectName(subjectTextField.getText());
-                    subject.addFlashCard(flashcard);
+                    subject.add(flashcard);
                     divider = new Divider();
                     divider.setDividerName(dividerTextField.getText());
-                    divider.addSubject(subject);
-                    dividerList.addDivider(divider);
+                    divider.add(subject);
+                    dividerList.add(divider);
                 }
             }
         }
@@ -351,17 +351,17 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
     // EFFECTS: Adding the new flashcard to a newly created subject and divider if the name of the divider and
     // subject inputted is new.
     public void differentDividerAndSubject() {
-        for (Divider d : dividerList.getDividers()) {
-            for (Subject s : d.getSubjects()) {
+        for (Divider d : dividerList.getList()) {
+            for (Subject s : d.getList()) {
                 if (!(d.getDividerName().equals(dividerTextField.getText()))
                         && !(s.getSubjectName().equals(subjectTextField.getText()))) {
                     subject = new Subject();
                     subject.setSubjectName(subjectTextField.getText());
-                    subject.addFlashCard(flashcard);
+                    subject.add(flashcard);
                     divider = new Divider();
                     divider.setDividerName(dividerTextField.getText());
-                    divider.addSubject(subject);
-                    dividerList.addDivider(divider);
+                    divider.add(subject);
+                    dividerList.add(divider);
                 }
             }
         }
@@ -369,7 +369,7 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
 
     // EFFECTS: prints all the dividers in dividerList to the console
     private void printDividers() {
-        List<Divider> dividers = dividerList.getDividers();
+        List<Divider> dividers = dividerList.getList();
         int i = 1;
 
         for (Divider d : dividers) {
@@ -383,7 +383,7 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
 
     // EFFECTS: prints all the subjects in divider to the console
     private void printSubjects(Divider divider) {
-        java.util.List<Subject> subjects = divider.getSubjects();
+        java.util.List<Subject> subjects = divider.getList();
         int i = 1;
 
         for (Subject s : subjects) {
@@ -396,7 +396,7 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
 
     // EFFECTS: prints all the flashcards in Subject to the console
     private void printFlashcards(Subject subject) {
-        List<FlashCard> flashcards = subject.getFlashcards();
+        List<FlashCard> flashcards = subject.getList();
 
         System.out.println("Flashcard Info: ");
         for (FlashCard f : flashcards) {

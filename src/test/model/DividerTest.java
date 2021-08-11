@@ -3,8 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,49 +26,38 @@ public class DividerTest {
 
     @Test
     void testConstructor() {
-        assertEquals(0, divider.dividerSize());
+        assertEquals(0, divider.size());
     }
 
     @Test
     void addSubjectTest() {
-        assertTrue(divider.addSubject(subject1));
-        assertEquals(1, divider.dividerSize());
-        assertFalse(divider.addSubject(subject1));
-        assertEquals(1, divider.dividerSize());
-        divider.addSubject(subject1);
-        assertTrue(divider.addSubject(subject2));
-        assertTrue(divider.addSubject(subject3));
-        assertEquals(3, divider.dividerSize());
+        assertTrue(divider.add(subject1));
+        assertEquals(1, divider.size());
+        assertFalse(divider.add(subject1));
+        assertEquals(1, divider.size());
+        divider.add(subject1);
+        assertTrue(divider.add(subject2));
+        assertTrue(divider.add(subject3));
+        assertEquals(3, divider.size());
     }
 
     @Test
     void dividerSizeTest() {
-        divider.addSubject(subject1);
-        assertEquals(1, divider.dividerSize());
-        assertEquals(0, divider2.dividerSize());
-        divider.addSubject(subject2);
-        divider.addSubject(subject3);
-        assertEquals(3, divider.dividerSize());
+        divider.add(subject1);
+        assertEquals(1, divider.size());
+        assertEquals(0, divider2.size());
+        divider.add(subject2);
+        divider.add(subject3);
+        assertEquals(3, divider.size());
     }
 
     @Test
     void removeSubjectTest() {
-        assertFalse(divider.removeSubject(subject1));
-        divider.addSubject(subject1);
-        assertTrue(divider.removeSubject(subject1));
-        assertFalse(divider.removeSubject(subject1));
+        assertFalse(divider.remove(subject1));
+        divider.add(subject1);
+        assertTrue(divider.remove(subject1));
+        assertFalse(divider.remove(subject1));
 
-    }
-
-    @Test
-    void clearDividerTest() {
-        assertEquals(0, divider.dividerSize());
-        assertTrue(divider.addSubject(subject1));
-        assertTrue(divider.addSubject(subject2));
-        assertTrue(divider.addSubject(subject3));
-        assertEquals(3, divider.dividerSize());
-        divider.clearDivider();
-        assertEquals(0, divider.dividerSize());
     }
 
     @Test
@@ -83,18 +70,18 @@ public class DividerTest {
 
     @Test
     void getSubjectTest() {
-        divider.addSubject(subject1);
-        divider.addSubject(subject2);
-        divider.addSubject(subject3);
-        assertEquals(subject1, divider.getSubject(0));
-        assertEquals(subject2, divider.getSubject(1));
+        divider.add(subject1);
+        divider.add(subject2);
+        divider.add(subject3);
+        assertEquals(subject1, divider.get(0));
+        assertEquals(subject2, divider.get(1));
     }
 
     @Test
     void getSubjectsTest() {
         addSubjectTest();
-        for (int i = 0; i < divider.dividerSize(); i++) {
-            assertEquals(divider.getSubject(i), divider.getSubjects().get(i));
+        for (int i = 0; i < divider.size(); i++) {
+            assertEquals(divider.get(i), divider.getList().get(i));
         }
     }
 }

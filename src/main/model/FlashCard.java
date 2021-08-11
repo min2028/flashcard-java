@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // Represent a FlashCard with the name, Question, Answer and day, month and day it was created.
-public class FlashCard implements Writable {
+public class FlashCard extends Writable {
     private int day;
     private int month;
     private int year;

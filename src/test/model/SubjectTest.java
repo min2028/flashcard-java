@@ -3,9 +3,6 @@ package model;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -54,65 +51,56 @@ public class SubjectTest {
     }
 
     private void addFlashCards() {
-        assertTrue(subject.addFlashCard(flashCard1));
-        assertTrue(subject.addFlashCard(flashCard2));
-        assertTrue(subject.addFlashCard(flashCard3));
-        assertTrue(subject.addFlashCard(flashCard4));
-        assertTrue(subject.addFlashCard(flashCard5));
-        assertTrue(subject.addFlashCard(flashCard6));
+        assertTrue(subject.add(flashCard1));
+        assertTrue(subject.add(flashCard2));
+        assertTrue(subject.add(flashCard3));
+        assertTrue(subject.add(flashCard4));
+        assertTrue(subject.add(flashCard5));
+        assertTrue(subject.add(flashCard6));
     }
 
     @Test
     void testConstructor() {
-        assertEquals(0, subject.subjectSize());
+        assertEquals(0, subject.size());
     }
 
     @Test
     void addFlashCardTest() {
         addFlashCards();
-        assertEquals(6, subject.subjectSize());
-        assertFalse(subject.addFlashCard(flashCard5));
-        assertEquals(6, subject.subjectSize());
-        assertFalse(subject.addFlashCard(flashCard6));
-        assertFalse(subject.addFlashCard(flashCard1));
-        assertEquals(6, subject.subjectSize());
+        assertEquals(6, subject.size());
+        assertFalse(subject.add(flashCard5));
+        assertEquals(6, subject.size());
+        assertFalse(subject.add(flashCard6));
+        assertFalse(subject.add(flashCard1));
+        assertEquals(6, subject.size());
     }
 
     @Test
     void removeFlashCardTest() {
-        assertTrue(subject.addFlashCard(flashCard1));
-        assertTrue(subject.removeFlashCard(flashCard1));
-        assertFalse(subject.removeFlashCard(flashCard1));
-        assertTrue(subject.addFlashCard(flashCard2));
-        assertTrue(subject.addFlashCard(flashCard3));
-        assertTrue(subject.addFlashCard(flashCard4));
-        assertTrue(subject.addFlashCard(flashCard5));
-        assertTrue(subject.addFlashCard(flashCard6));
-        assertTrue(subject.removeFlashCard(flashCard2));
-        assertFalse(subject.removeFlashCard(flashCard2));
+        assertTrue(subject.add(flashCard1));
+        assertTrue(subject.remove(flashCard1));
+        assertFalse(subject.remove(flashCard1));
+        assertTrue(subject.add(flashCard2));
+        assertTrue(subject.add(flashCard3));
+        assertTrue(subject.add(flashCard4));
+        assertTrue(subject.add(flashCard5));
+        assertTrue(subject.add(flashCard6));
+        assertTrue(subject.remove(flashCard2));
+        assertFalse(subject.remove(flashCard2));
 
     }
 
     @Test
     void subjectSizeTest() {
-        assertTrue(subject.addFlashCard(flashCard1));
-        assertEquals(1, subject.subjectSize());
-        assertFalse(subject.addFlashCard(flashCard1));
-        assertTrue(subject.addFlashCard(flashCard2));
-        assertTrue(subject.addFlashCard(flashCard3));
-        assertTrue(subject.addFlashCard(flashCard4));
-        assertTrue(subject.addFlashCard(flashCard5));
-        assertTrue(subject.addFlashCard(flashCard6));
-        assertEquals(6, subject.subjectSize());
-    }
-
-    @Test
-    void clearSubjectTest() {
-        assertEquals(0, subject.subjectSize());
-        addFlashCards();
-        assertEquals(6, subject.subjectSize());
-        subject.clearSubject();
-        assertEquals(0, subject.subjectSize());
+        assertTrue(subject.add(flashCard1));
+        assertEquals(1, subject.size());
+        assertFalse(subject.add(flashCard1));
+        assertTrue(subject.add(flashCard2));
+        assertTrue(subject.add(flashCard3));
+        assertTrue(subject.add(flashCard4));
+        assertTrue(subject.add(flashCard5));
+        assertTrue(subject.add(flashCard6));
+        assertEquals(6, subject.size());
     }
 
     @Test
@@ -124,15 +112,15 @@ public class SubjectTest {
     @Test
     void getFlashcardTest() {
         addFlashCards();
-        assertEquals(flashCard2, subject.getFlashCard(1));
-        assertEquals(flashCard1, subject.getFlashCard(0));
+        assertEquals(flashCard2, subject.get(1));
+        assertEquals(flashCard1, subject.get(0));
     }
 
     @Test
     void getFlashcardsTest() {
         addFlashCards();
-        for (int i = 0; i < subject.subjectSize(); i++) {
-            assertEquals(subject.getFlashCard(i), subject.getFlashcards().get(i));
+        for (int i = 0; i < subject.size(); i++) {
+            assertEquals(subject.get(i), subject.getList().get(i));
         }
     }
 }
