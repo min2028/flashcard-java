@@ -23,10 +23,8 @@ public class Divider extends Writable implements Compartable {
     // returns true if added successfully, false otherwise
     @Override
     public boolean add(Object subject) {
-        if (subject instanceof Subject) {
-            if (!divider.contains(subject)) {
-                return divider.add((Subject) subject);
-            }
+        if (!divider.contains(subject)) {
+            return divider.add((Subject) subject);
         }
         return false;
     }
@@ -74,7 +72,7 @@ public class Divider extends Writable implements Compartable {
     public JSONArray dividerToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Subject sbj: divider) {
+        for (Subject sbj : divider) {
             jsonArray.put(sbj.toJson());
         }
         return jsonArray;

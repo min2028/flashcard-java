@@ -23,10 +23,8 @@ public class DividerList extends Writable implements Compartable {
     // added successfully, false otherwise
     @Override
     public boolean add(Object divider) {
-        if (divider instanceof Divider) {
-            if (!dividerList.contains(divider)) {
-                return dividerList.add((Divider) divider);
-            }
+        if (!dividerList.contains(divider)) {
+            return dividerList.add((Divider) divider);
         }
         return false;
     }
@@ -35,10 +33,8 @@ public class DividerList extends Writable implements Compartable {
     // EFFECTS: remove the divider from the dividerlist, true if successful, false otherwise
     @Override
     public boolean remove(Object divider) {
-        if (divider instanceof Divider) {
-            if (dividerList.size() > 0) {
-                return dividerList.remove(divider);
-            }
+        if (dividerList.size() > 0) {
+            return dividerList.remove(divider);
         }
         return false;
     }

@@ -26,10 +26,8 @@ public class Subject extends Writable implements Compartable {
     // and returns true if added successfully, false otherwise
     @Override
     public boolean add(Object flashCard) {
-        if (flashCard instanceof FlashCard) {
-            if (!subject.contains(flashCard)) {
-                return subject.add((FlashCard) flashCard);
-            }
+        if (!subject.contains(flashCard)) {
+            return subject.add((FlashCard) flashCard);
         }
         return false;
     }
@@ -79,7 +77,7 @@ public class Subject extends Writable implements Compartable {
     public JSONArray subjectToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (FlashCard fc: subject) {
+        for (FlashCard fc : subject) {
             jsonArray.put(fc.toJson());
         }
         return jsonArray;
