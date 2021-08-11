@@ -55,6 +55,8 @@ so it uses all the four classes in the model package as well as the classes in t
 FlashCardGeneratorApp only creates the welcome window so it has no associations with the classes created other than the 
 classes from the java library.
 
-If I have time, I would use the observer pattern to notify the user the flashcard or subject or divider they are 
-creating. I would also create more classes with a specific behaviour to each class to increase cohesion for the 
+If I have more time, 
+- I would use the observer pattern to notify the user the flashcard or subject or divider they are 
+creating.
+- I would create more classes with a specific behaviour to each class to increase cohesion for the 
 FlashCardGenerator and NewWindowToCreateFlashcard classes.
