@@ -7,14 +7,14 @@ import model.Subject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.List;
 
 // Represent a new window where the flashcard information will be inputted
@@ -64,6 +64,8 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
     private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private JsonReader jsonReader = new JsonReader(JSON_STORE);
 
+    private Clip clip;
+
     private int initialSet = 0;
 
     // EFFECTS: Create a new window where the flashcard information input area and menu bar will be created
@@ -72,7 +74,7 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
 
         super("Flashcard Generator");
 
-        new SoundTrack("/Users/sittpaing/Downloads/jazz.wav");
+        playSound("/Users/sittpaing/Downloads/jazz.wav");
 
         setPreferredSize(new Dimension(940, 636));
 
@@ -440,5 +442,19 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
 
         System.setOut(new PrintStream(out, true));
         System.setErr(new PrintStream(out, true));
+    }
+
+    // EFFECTS: play the soundtrack
+    public void playSound(String soundPath) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundPath));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception e) {
+            System.out.println("Error with playing sound.");
+            e.printStackTrace();
+        }
     }
 }

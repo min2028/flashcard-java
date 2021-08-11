@@ -11,7 +11,7 @@ import java.util.List;
 // Represents a divider with its name and Subject list in it
 public class Divider extends Writable implements Compartable {
     private String name;
-    LinkedList<Subject> divider;
+    private LinkedList<Subject> divider;
 
     // EFFECTS: Create an emtpy divider
     public Divider() {

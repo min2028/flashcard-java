@@ -45,3 +45,16 @@ Functions the application will have:
  Added the Compartable interface and Writable abstract class. DividerList, divider, subject classes
  implements the Compartable interface and all four classes in the model package extend the Writable 
  abstract class. So, all four classes in the model package plays a role.
+ 
+#### Phase 4: Task 3
+Since DividerList is the list of divider and divider is the list of subject and subject is the list of flashcards, they 
+have association downwards. DividerList, divider and subject are all compartments so they implement the compartable 
+interface. All the classes in the model package are being translated into json file in to save, so they all implement 
+the abstract class, Writable. FlashcardGenerator and NewWindowToCreateFlashcard generates the CUI and GUI respectively, 
+so it uses all the four classes in the model package as well as the classes in the persistence package. 
+FlashCardGeneratorApp only creates the welcome window so it has no associations with the classes created other than the 
+classes from the java library.
+
+If I have time, I would use the observer pattern to notify the user the flashcard or subject or divider they are 
+creating. I would also create more classes with a specific behaviour to each class to increase cohesion for the 
+FlashCardGenerator and NewWindowToCreateFlashcard classes.
