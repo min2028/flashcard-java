@@ -40,3 +40,8 @@ Functions the application will have:
 - As a user, I want to be able to load and save the state of the application (For GUI)
 - As a user, I want to be able to see the panel that displays the flashcards, and name of the divider and
   subject it has been added to when I load the generator. (For GUI)
+  
+#### Phase 4: Task 2
+ Added the Compartable interface and Writable abstract class. DividerList, divider, subject classes
+ implements the Compartable interface and all four classes in the model package extend the Writable 
+ abstract class. So, all four classes in the model package plays a role.
