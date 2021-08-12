@@ -62,6 +62,7 @@ public class DividerList extends Writable implements Compartable {
         return json;
     }
 
+    // EFFECTS: returns dividers in this dividerList as a JSON array
     public JSONArray dividerListToJson() {
         JSONArray jsonArray = new JSONArray();
 

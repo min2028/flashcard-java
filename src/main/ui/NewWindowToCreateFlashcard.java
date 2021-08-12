@@ -444,7 +444,7 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
         System.setErr(new PrintStream(out, true));
     }
 
-    // EFFECTS: play the soundtrack
+    // EFFECTS: play the soundtrack given the path to the sound file
     public void playSound(String soundPath) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundPath));

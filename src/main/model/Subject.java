@@ -74,6 +74,7 @@ public class Subject extends Writable implements Compartable {
         return json;
     }
 
+    // EFFECTS: returns flashCards in this subject as a JSON array
     public JSONArray subjectToJson() {
         JSONArray jsonArray = new JSONArray();
 
