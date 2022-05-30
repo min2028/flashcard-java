@@ -27,7 +27,7 @@ public class FlashcardGeneratorApp extends JFrame implements ActionListener {
         setSize(940, 636);
         JPanel backgroundpanel = new JPanel();
         background = new JLabel("");
-        background.setIcon(new ImageIcon("/Users/sittpaing/Downloads/flashcardIcon2.jpeg"));
+        background.setIcon(new ImageIcon("src/assets/flashcard.png"));
 
         options();
         backgroundpanel.add(background);

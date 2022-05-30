@@ -74,7 +74,7 @@ public class NewWindowToCreateFlashcard extends JFrame implements ActionListener
 
         super("Flashcard Generator");
 
-        playSound("/Users/sittpaing/Downloads/jazz.wav");
+        playSound("src/assets/jazz.wav");
 
         setPreferredSize(new Dimension(940, 636));
 
